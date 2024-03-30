@@ -1,45 +1,45 @@
 //this includes the vehicle class as a module
 const VehicleModule = require("./vehicleBaseClass")
 
-class automobile extends VehicleModule {
+class Car extends VehicleModule {
     constructor(make, model, year, color, mileage) {
         super(make, model, year, color, mileage);
-        this.maxPassengers = 6;
+        this.maxPassengers = 5;
         this.passenger = 0;
         this.numberOfWheels = 4;
-        this.maxSpeed = 120;
-        this.fuel = 25;
+        this.maxSpeed = 160;
+        this.fuel = 10;
         this.scheduleService = false;
     }
 
-    passengerNumber(num) {
+    checkService() {
+        if (this.mileage > 30000) {            
+            this.scheduleService = true
+            return this.scheduleService;                       
+        }
+    }
+
+    start() {
+        if (this.fuel > 0) {            
+            console.log("engine has started.");
+            return this.started = true
+        } else {
+            console.log("no fuel");
+            return this.started = false;
+        }
+    }
+
+    loadPassenger(num) {
         if (this.passenger < this.maxPassengers) {
             if ((num + this.passenger) <= this.maxPassengers) {
                 this.passenger = num;
                 return this.passenger;               
             } else {
-                console.log(this.model + " " + this.make + "Sorry, no room for everyone.");
+                console.log(this.model + " " + this.make + " not have enough space to take all passengers.");
 
             }
         } else {
-            console.log(this.model + " " + this.make + "all onboard, let's start the car");
-        }
-    }
-    
-    start() {
-        if (this.fuel > 0) {            
-            console.log("ready to start");
-            return this.started = true
-        } else {
-            console.log("Stop for at the gas station");
-            return this.started = false;
-        }
-    }
-    
-    checkService() {
-        if (this.mileage > 15000) {            
-            this.scheduleService = true
-            return this.scheduleService;                       
+            console.log(this.model + " " + this.make + " is full");
         }
     }
 
@@ -47,11 +47,12 @@ class automobile extends VehicleModule {
 }
 
 
-let danCar = new automobile('mercury', 'rad_sedan', '2024', 'white', 10000)
+let myCar = new Car('mercury', 'rad_sedan', '2020', 'white', 50000)
 
-danCar.loadPassenger(2)
-danCar.start()
-danCar.checkService()
+myCar.start()
+myCar.loadPassenger(5)
+myCar.stop()
+myCar.checkService()
 
-console.log(danCar)
+console.log(myCar)
 
